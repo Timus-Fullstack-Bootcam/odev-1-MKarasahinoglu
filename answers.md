@@ -47,11 +47,11 @@
    -	The `this` keyword, when used inside a JavaScript function, represents the current context. The context specifies in which object or scope the function is running. By using `this`, you can access the object or scope in which the function is being executed.
 #### 9.	Difference Between `==` and `===`
 - `==` operator only compares values and performs type coercion:
-	```
+	```javascript
 	'5' == 5 // true, because type coercion is performed, and values become equal.
 	```
 - `===` operator checks whether the values and data types are both equal, without performing type coercion:
-	```
+	```javascript
 	'5' === 5 // false, because data types are different.
 	```
 #### 10.	Difference Between `let`, `var`, and `const`
@@ -230,7 +230,17 @@ let dolap = ["Shirt", "Pant", "TShirt"];
 let dolapObject= Object.fromEntries(dolap.map((item,index)=>[index,item]))
 console.log(dolapObject)
 ```
-
+#### Difference between `splice` and `slice`
+- `slice`
+  - It is used to select a specific portion of an array.
+  - Creates a new array and does not modify the original array.
+  - Takes start and end indices as parameters.
+  - The end index is not included.
+- `splice`
+  - It is used to remove or replace a portion of an array.
+  - Modifies the original array.
+  - Takes the start index, the number of elements to be removed, and optionally, new elements to be added as parameters.
+- In summary, `slice` copies a specific range and does not modify the original array, while `splice` makes changes to the array (can add, remove, or replace elements) and affects the original array.
 ### Section 2.2
 
 ```javascript
@@ -254,3 +264,113 @@ const highestNumber=arr.sort((a,b)=> b-a).slice(0,1)[0]
 console.log(lowestNumber,highestNumber)
 ```
 ### Section 2.3
+
+```javascript
+// What is the output and how ?
+function job() {
+        return new Promise(function(resolve, reject) {
+            reject();
+    });
+}
+
+let promise = job();
+
+promise
+.then(function() {
+    console.log('Success 1');
+    })
+.then(function() {
+    console.log('Success 2');
+})
+.then(function() {
+    console.log('Success 3');
+})
+.catch(function() {
+    console.log('Error 1');
+})
+.then(function() {
+    console.log('Success 4');
+});
+
+// Error 1
+// Success 4
+/*
+Function "job" returns "reject" which runs the catch block when 
+the promise is executed printing "Error 1". Then, "Success 4" is
+printed just because the last then block is not connected to the
+previous actions.
+*/
+```
+
+```javascript
+// What is the output and how ?
+function job(state) {
+    return new Promise(function(resolve, reject) {
+        if (state) {
+            resolve('success');
+        } 
+        else {
+            reject('error');
+        }
+    });
+}
+
+let promise = job(true);
+
+promise
+.then(function(data) {
+    console.log(data);
+    return job(true);
+})
+.then(function(data) {
+    if (data !== 'victory') {
+        throw 'Defeat';
+    }
+    return job(true);
+})
+.then(function(data) {
+    console.log(data);
+})
+.catch(function(error) {
+    console.log(error);
+    return job(false);
+})
+.then(function(data) {
+    console.log(data);
+    return job(true);
+})
+.catch(function(error) {
+    console.log(error);
+    return 'Error caught';
+})
+.then(function(data) {
+    console.log(data);
+    return new Error('test');
+})
+.then(function(data) {
+    console.log('Success:', data.message);
+})
+.catch(function(data) {
+    console.log('Error:', data.message);
+});
+
+// success
+// Defeat
+// error
+// Error caught
+// Success: test
+
+/*
+- First input is true, so first then block prints "success" and returns true.
+- Second then block throw "Defeat" as data is not equal to "victory", because it is success,
+and returns true.
+- Third then block is passed as catch block that comes after it catches and prints "Defeat"
+then it returns false.
+- Fourth then block is passed as well, as promise returns reject because last return was false,
+so second catch block that comes after fourth then block prints "error" coming from promise,
+and return "Error caught".
+- Fifth then block takes "Error caught" and prints it, and returns new Error("test").
+- Sixth then block takes this message and prints "Success: test"
+- The last catch block does not work.
+*/
+```
