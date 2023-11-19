@@ -19,10 +19,10 @@
 	- Array : Represents ordered data collections.
 	- Function : Represents a reusable block of code.
 
-#### 4.	Difference Between null and undefined
--	`null` signifies that a value has been intentionally set as absent or undefined. On the other hand, `undefined` indicates that a value has not been assigned or is missing.
+#### 4.	Difference Between `null` and `undefined`
+-	`null` signifies that a value has been intentionally set as absent. On the other hand, `undefined` indicates that a value has not been assigned or is missing.
 #### 5.	What is `NaN`
-   -	Exactly, NaN stands for "Not-a-Number" and is used in JavaScript to represent the result of a mathematical operation that is undefined or unrepresentable as a real number. It typically occurs when you attempt to perform an invalid operation, such as dividing zero by zero or attempting to parse a non-numeric string.
+   -	`NaN` stands for "Not-a-Number" and is used in JavaScript to represent the result of a mathematical operation that is undefined or unrepresentable as a real number. It typically occurs when you attempt to perform an invalid operation, such as dividing zero by zero or attempting to parse a non-numeric string.
 #### 6.	Ways to Add Comments in JavaScript
 -	Signle-Line Comment
 	```javascript
@@ -32,7 +32,7 @@
 	```
 -	Multi-Line Comment
 	```javascript
-		/* 
+	/* 
 	This
 	is
 	a
@@ -46,11 +46,11 @@
 #### 8.	`this` Keyword in JavaScript
    -	The `this` keyword, when used inside a JavaScript function, represents the current context. The context specifies in which object or scope the function is running. By using `this`, you can access the object or scope in which the function is being executed.
 #### 9.	Difference Between `==` and `===`
-	-	`==` operator only compares values and performs type coercion:
+- `==` operator only compares values and performs type coercion:
 	```
 	'5' == 5 // true, because type coercion is performed, and values become equal.
 	```
-	-	`===` operator checks whether the values and data types are both equal, without performing type coercion:
+- `===` operator checks whether the values and data types are both equal, without performing type coercion:
 	```
 	'5' === 5 // false, because data types are different.
 	```
@@ -71,10 +71,10 @@
 - If the variable will only exist within the switch block, it can be defined using `let` or `const` inside the case blocks.
 - If the variable needs to be reassigned outside the switch block, it should be declared using `let` or `const` outside the block.
 #### 13. Pure Function
-   -	Always produces the same output for the same input.
-	 -	Does not make any changes outside itself; it has no side effects.
-	 -	Depends on inputs and is not dependent on external factors.
-	 -	Easier to test and understand.
+- Always produces the same output for the same input.
+- Does not make any changes outside itself; it has no side effects.
+- Depends on inputs and is not dependent on external factors.
+- Easier to test and understand.
 #### 14. Rest Operator
    -	The rest operator is used to gather variable numbers of arguments in function parameters or elements in an array. It is typically denoted by three dots (...) and is useful for combining values.
 #### 15. Object Destructuring
